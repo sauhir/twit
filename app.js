@@ -36,9 +36,10 @@ const updateTweets = () => {
     max_id: last_tweet,
   };
 
-  client.get("search/tweets", _options, function(error, tweets, response) {
+  client.get("search/tweets", _options, function(error, tweets) {
     if (tweets.statuses) {
       var _statuses = tweets.statuses;
+      last_tweet = _statuses[_statuses.length-1].id_str;
       shuffle(_statuses);
       popTweet(_statuses);
     }
